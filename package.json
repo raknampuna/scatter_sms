@@ -1,0 +1,14 @@
+{
+  "name": "adhd-sms-assistant",
+  "version": "0.1.0",
+  "description": "An SMS-based ADHD assistant and coach that helps users manage their goals and tasks",
+  "scripts": {},
+  "main": "app.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2"
+  }
+}
