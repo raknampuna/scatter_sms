@@ -34,7 +34,7 @@ async function sendSMS(to, message) {
 
 // Example usage of the sendSMS function
 // Replace '+1234567890' with the recipient's phone number (in E.164 format)
-// sendSMS('+1234567890', 'Hello from Aissistant!');
+// sendSMS('+1234567890', 'Hello from ScatterBrain SMS!');
 
 // Export the sendSMS function so it can be used in other parts of your project
 module.exports = { sendSMS };

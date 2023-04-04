@@ -8,6 +8,19 @@ const express = require('express');
 const cors = require('cors');
 const chatRoutes = require('./routes/chatRoutes'); // Import chatRoutes
 const rootRoutes = require('./routes/rootRoutes'); // Import rootRoutes
+const mongoose = require('mongoose'); // Import Mongoose
+
+// Replace this with your own MongoDB connection string
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/scatterbrainSMS';
+
+// Connect to MongoDB using Mongoose
+mongoose.connect(MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+})
+.then(() => console.log('Connected to MongoDB'))
+.catch((err) => console.error('Error connecting to MongoDB:', err));
 
 // Create an instance of the Express application
 const app = express();
