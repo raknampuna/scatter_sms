@@ -1,6 +1,6 @@
 // Import required libraries and packages
 const axios = require('axios');
-const { sendSMS } = require('./twilioHandler');
+const { sendSMS } = require('../twilioHandler');
 const User = require('../models/user'); // Import the User model
 
 // Import your OpenAI API key and set the OpenAI API endpoint
@@ -34,10 +34,7 @@ async function chatGPT(userMessage) {
 }
 
 // Main function to handle incoming SMS messages
-async function handleIncomingMessage(req, res) {
-  const userMessage = req.body.Body;
-  const userPhoneNumber = req.body.From;
-
+async function handleIncomingMessage(userMessage, userPhoneNumber) {
   // Check if the user exists in the database
   let user = await User.findOne({ phoneNumber: userPhoneNumber });
 
@@ -49,11 +46,10 @@ async function handleIncomingMessage(req, res) {
 
   try {
     const scatterbrainResponse = await chatGPT(userMessage);
-    await sendSMS(userPhoneNumber, scatterbrainResponse);
-    res.status(200).send('Message processed successfully.');
+    return scatterbrainResponse;
   } catch (error) {
     console.error(`Error handling incoming message: ${error.message}`);
-    res.status(500).send('Error processing message.');
+    return 'Error processing message.';
   }
 }
 
