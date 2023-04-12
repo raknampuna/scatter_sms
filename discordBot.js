@@ -1,7 +1,8 @@
 require('dotenv').config();
+const { generateReply } = require('./services/ai.js');
 const { Client, GatewayIntentBits, REST, Routes } = require('discord.js');
 
-const CLIENT_ID = '1093692560792363136'; // Replace with your bot's client ID
+const CLIENT_ID = process.env.DISCORD_CLIENT_ID;
 const TOKEN = process.env.DISCORD_BOT_TOKEN;
 
 // Log the start of refreshing application commands
@@ -55,11 +56,23 @@ client.on('interactionCreate', async interaction => {
   // Handle the 'chat' command
   if (interaction.commandName === 'chat') {
     const message = interaction.options.getString('message');
-    // Process the message and generate a response using ChatGPT API here
-    const response = 'This is the AI response'; // Replace this with the actual response from ChatGPT API
 
-    // Reply to the interaction with the AI response
-    await interaction.reply(response);
+    // Let Discord know that you intend to reply, but need more time
+    await interaction.deferReply();
+
+    // Process the message and generate a response using ChatGPT API
+    try {
+      const response = await generateReply(message);
+
+      // Format the response to include the user's message
+      const formattedResponse = `**You:** ${message}\n**${client.user.username}:** ${response}`;
+
+      // Edit the deferred reply with the formatted response
+      await interaction.editReply(formattedResponse);
+    } catch (error) {
+      console.error(error);
+      await interaction.editReply('An error occurred while processing your request.');
+    }
   }
 });
 
