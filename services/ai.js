@@ -10,6 +10,7 @@ const OPENAI_API_URL = 'https://api.openai.com/v1/chat/completions';
 
 // Function to interact with the ChatGPT API
 async function generateReply(userMessage) {
+  console.log('Starting to generate reply...'); // Add this log
   const messages = [
     {
       role: "user",
@@ -33,6 +34,8 @@ async function generateReply(userMessage) {
   try {
     const response = await axios.post(OPENAI_API_URL, data, { headers: headers });
 
+    console.log('Received response from ChatGPT API'); // Add this log
+
     // Log the generated response before returning it
     console.log('Generated response:', response.data.choices[0].message.content.trim());
 
@@ -44,4 +47,5 @@ async function generateReply(userMessage) {
 }
 
 // Export the generateReply function
-module.exports = { generateReply };
+module.exports = generateReply;
+
