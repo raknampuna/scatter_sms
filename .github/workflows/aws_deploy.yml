@@ -33,7 +33,7 @@ jobs:
     - name: Deploy to Elastic Beanstalk
       run: |
         echo "Deploying to Elastic Beanstalk..."
-        EB_BUCKET=your_bucket_name
+        EB_BUCKET=elasticbeanstalk-us-east-2-522524811697
         aws s3 cp . s3://$EB_BUCKET/ --recursive --exclude ".git/*" --exclude ".github/*"
         aws elasticbeanstalk create-application-version --application-name your_application_name --version-label $GITHUB_SHA --source-bundle S3Bucket=$EB_BUCKET,S3Key=$GITHUB_SHA.zip
         aws elasticbeanstalk update-environment --application-name your_application_name --environment-name your_environment_name --version-label $GITHUB_SHA
