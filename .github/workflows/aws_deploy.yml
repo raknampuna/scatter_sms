@@ -42,4 +42,4 @@ jobs:
         # Create a new application version using the uploaded zip file
         aws elasticbeanstalk create-application-version --application-name scatterbrain_sms --version-label $GITHUB_SHA --source-bundle S3Bucket=$EB_BUCKET,S3Key=$ZIP_FILE
         # Update the environment to use the new application version
-        aws elasticbeanstalk update-environment --application-name scatterbrain_sms --environment-name scatterbrain_sms-prod --version-label $GITHUB_SHA
+        aws elasticbeanstalk update-environment --application-name scatterbrain_sms --environment-name Scatterbrainsms-prod --version-label $GITHUB_SHA
