@@ -15,7 +15,8 @@ router.post('/incoming-sms', async (req, res) => {
 
   try {
     const scatterbrainResponse = await chatController.handleIncomingMessage(userMessage, userPhoneNumber);
-    await sendSMS(userPhoneNumber, scatterbrainResponse);
+    // TWILIO Portion commented out
+//    await sendSMS(userPhoneNumber, scatterbrainResponse);
     res.status(200).send('Message processed successfully.');
   } catch (error) {
     console.error(`Error handling incoming message: ${error.message}`);

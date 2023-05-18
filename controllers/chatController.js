@@ -1,6 +1,7 @@
 // Import required libraries and packages
 const axios = require('axios');
-const { sendSMS } = require('../twilioHandler');
+// TWILIO Portion commented out
+//const { sendSMS } = require('../twilioHandler');
 const User = require('../models/user'); // Import the User model
 const { generateReply } = require('../services/ai'); // Import the generateReply function from the ai.js file
 
